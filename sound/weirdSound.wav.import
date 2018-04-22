@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/weirdSound.wav-cfc9f31454d4f1b96b4130cee88063b7.sample"
+
+[deps]
+
+source_file="res://sound/weirdSound.wav"
+source_md5="0899f2ef713b2724aa6394214a4b0bf1"
+
+dest_files=[ "res://.import/weirdSound.wav-cfc9f31454d4f1b96b4130cee88063b7.sample" ]
+dest_md5="9cbb56923f66f1fd9df3d208a804f87d"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

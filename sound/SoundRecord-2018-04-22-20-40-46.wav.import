@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SoundRecord-2018-04-22-20-40-46.wav-9daba2c57ac62eaf880068c1da280a35.sample"
+
+[deps]
+
+source_file="res://sound/SoundRecord-2018-04-22-20-40-46.wav"
+source_md5="677872f9a28d662ac4bb07e4f442060f"
+
+dest_files=[ "res://.import/SoundRecord-2018-04-22-20-40-46.wav-9daba2c57ac62eaf880068c1da280a35.sample" ]
+dest_md5="a48a5fbfefd7bc660fdcd4a73e8b7adf"
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

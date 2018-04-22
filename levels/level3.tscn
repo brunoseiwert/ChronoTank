@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://levels/level.gd" type="Script" id=1]
+[ext_resource path="res://enemies/enemy1.tscn" type="PackedScene" id=2]
+
+[node name="level3" type="Node2D"]
+
+script = ExtResource( 1 )
+
+[node name="enemy1" parent="." index="0" instance=ExtResource( 2 )]
+
+position = Vector2( 981.555, 552.06 )
+
+[node name="enemy1_2" parent="." index="1" instance=ExtResource( 2 )]
+
+position = Vector2( 1617.89, 236.751 )
+
+[node name="enemy1_3" parent="." index="2" instance=ExtResource( 2 )]
+
+position = Vector2( 387.174, 201.33 )
+
+[node name="enemy1_4" parent="." index="3" instance=ExtResource( 2 )]
+
+position = Vector2( 1620.97, 800.159 )
+
+[node name="enemy1_5" parent="." index="4" instance=ExtResource( 2 )]
+
+position = Vector2( 406.75, 808.814 )
+
+

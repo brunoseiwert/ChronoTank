@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://player/player.gd" type="Script" id=1]
+[ext_resource path="res://player/bullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://art/player/playerTankBottom.png" type="Texture" id=3]
+[ext_resource path="res://art/player/playerTankTop.png" type="Texture" id=4]
+[ext_resource path="res://art/player/bulletTrail.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 40, 45.6 )
+
+[node name="player" type="KinematicBody2D"]
+
+input_pickable = true
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+gamePath = null
+bullet = ExtResource( 2 )
+movDur = 1.07
+bulletVel = 600
+movRange = 800
+shootingSound = null
+deathSound = null
+explosion = null
+
+[node name="feet" type="Sprite" parent="." index="0"]
+
+scale = Vector2( 8, 8 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="top" type="Sprite" parent="." index="1"]
+
+scale = Vector2( 8, 8 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="bulletSpawn" type="Position2D" parent="top" index="0"]
+
+position = Vector2( 0, -7.5 )
+
+[node name="muzzleFlash" type="Sprite" parent="top" index="1"]
+
+visible = false
+position = Vector2( 0, -12.5 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="muzzleFlashTimer" type="Timer" parent="top/muzzleFlash" index="0"]
+
+process_mode = 1
+wait_time = 0.05
+one_shot = true
+autostart = false
+
+[node name="collider" type="CollisionShape2D" parent="." index="2"]
+
+visible = false
+position = Vector2( 0, 4 )
+scale = Vector2( 1, 0.964912 )
+shape = SubResource( 1 )
+
+[node name="tween" type="Tween" parent="." index="3"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[connection signal="timeout" from="top/muzzleFlash/muzzleFlashTimer" to="." method="_on_muzzleFlashTimer_timeout"]
+
+[connection signal="tween_completed" from="tween" to="." method="_on_tween_tween_completed"]
+
+

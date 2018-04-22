@@ -1,0 +1,488 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Game.gd" type="Script" id=1]
+[ext_resource path="res://enemies/enemy1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://enemies/enemy2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://enemies/enemy3.tscn" type="PackedScene" id=4]
+[ext_resource path="res://levels/level1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://levels/level2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://levels/level3.tscn" type="PackedScene" id=7]
+[ext_resource path="res://levels/level4.tscn" type="PackedScene" id=8]
+[ext_resource path="res://levels/level5.tscn" type="PackedScene" id=9]
+[ext_resource path="res://levels/level6.tscn" type="PackedScene" id=10]
+[ext_resource path="res://levels/level7.tscn" type="PackedScene" id=11]
+[ext_resource path="res://levels/level8.tscn" type="PackedScene" id=12]
+[ext_resource path="res://levels/level9.tscn" type="PackedScene" id=13]
+[ext_resource path="res://levels/level10.tscn" type="PackedScene" id=14]
+[ext_resource path="res://art/background.png" type="Texture" id=15]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=16]
+[ext_resource path="res://sound/shoot2.wav" type="AudioStream" id=17]
+[ext_resource path="res://sound/deathSound.wav" type="AudioStream" id=18]
+[ext_resource path="res://explosion.tscn" type="PackedScene" id=19]
+[ext_resource path="res://enemies/bullets/Game.tres" type="DynamicFont" id=20]
+[ext_resource path="res://buttonHover.tres" type="StyleBox" id=21]
+[ext_resource path="res://buttonPressed.tres" type="StyleBox" id=22]
+[ext_resource path="res://buttonNormal.tres" type="StyleBox" id=23]
+[ext_resource path="res://Jaapokki.tres" type="DynamicFont" id=24]
+[ext_resource path="res://Jaapokkienchance-Regular.otf" type="DynamicFontData" id=25]
+[ext_resource path="res://japapokkiSmal.tres" type="DynamicFont" id=26]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 180
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 25 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="Game" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+state = 0
+enemy1 = ExtResource( 2 )
+enemy2 = ExtResource( 3 )
+enemy3 = ExtResource( 4 )
+level1 = ExtResource( 5 )
+level2 = ExtResource( 6 )
+level3 = ExtResource( 7 )
+level4 = ExtResource( 8 )
+level5 = ExtResource( 9 )
+level6 = ExtResource( 10 )
+level7 = ExtResource( 11 )
+level8 = ExtResource( 12 )
+level9 = ExtResource( 13 )
+level10 = ExtResource( 14 )
+
+[node name="background" type="Sprite" parent="." index="0"]
+
+position = Vector2( 1021.73, 1024 )
+scale = Vector2( 16, 16 )
+texture = ExtResource( 15 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="playerPos" type="Position2D" parent="." index="1"]
+
+position = Vector2( 1024, 1600 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="actors" type="Node2D" parent="." index="2"]
+
+[node name="player" parent="actors" index="0" groups=[
+"friendly",
+] instance=ExtResource( 16 )]
+
+position = Vector2( 133.823, 266.419 )
+z_index = 1
+_sections_unfolded = [ "Transform", "Z Index" ]
+gamePath = NodePath("../..")
+movDur = 0.2
+bulletVel = 2000
+shootingSound = ExtResource( 17 )
+deathSound = ExtResource( 18 )
+explosion = ExtResource( 19 )
+
+[node name="UI" type="Control" parent="." index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
+
+[node name="movLine" type="Line2D" parent="UI" index="0"]
+
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 16.0
+default_color = Color( 0.223529, 0.521569, 0.352941, 1 )
+texture_mode = 4784213
+begin_cap_mode = 2
+end_cap_mode = 2
+sharp_limit = 2.0
+round_precision = 8
+
+[node name="shootLine" type="Line2D" parent="UI" index="1"]
+
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 16.0
+default_color = Color( 1, 0.443137, 0.521569, 1 )
+texture_mode = 4784213
+begin_cap_mode = 2
+end_cap_mode = 2
+sharp_limit = 2.0
+round_precision = 8
+
+[node name="GOmenu" type="Control" parent="UI" index="2"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="gameOver" type="Label" parent="UI/GOmenu" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 512.0
+margin_top = 128.0
+margin_right = 1536.0
+margin_bottom = 640.0
+rect_min_size = Vector2( 64, 16 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 20 )
+custom_colors/font_color = Color( 0.8, 0.215686, 0.215686, 1 )
+custom_colors/font_color_shadow = Color( 0.592157, 0.937255, 0.701961, 1 )
+custom_constants/shadow_offset_x = 8
+custom_constants/line_spacing = 8
+text = "GAME OVER"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="restart" type="Button" parent="UI/GOmenu" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 768.0
+margin_top = 640.0
+margin_right = 1280.0
+margin_bottom = 768.0
+rect_min_size = Vector2( 64, 16 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 22 )
+custom_styles/normal = ExtResource( 23 )
+custom_fonts/font = ExtResource( 24 )
+custom_colors/font_color = Color( 0.592157, 0.937255, 0.701961, 1 )
+custom_colors/font_color_hover = Color( 0.443207, 0.804688, 0.557359, 1 )
+custom_colors/font_color_pressed = Color( 0.443137, 0.803922, 0.556863, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Restart Level"
+flat = false
+align = 1
+_sections_unfolded = [ "Rect", "custom_colors", "custom_styles" ]
+
+[node name="backToMenu" type="Button" parent="UI/GOmenu" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 768.0
+margin_top = 896.0
+margin_right = 1280.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 64, 16 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 22 )
+custom_styles/normal = ExtResource( 23 )
+custom_fonts/font = ExtResource( 24 )
+custom_colors/font_color = Color( 0.592157, 0.937255, 0.701961, 1 )
+custom_colors/font_color_hover = Color( 0.443207, 0.804688, 0.557359, 1 )
+custom_colors/font_color_pressed = Color( 0.443137, 0.803922, 0.556863, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Back to Menu"
+flat = false
+align = 1
+_sections_unfolded = [ "Rect", "custom_colors", "custom_styles" ]
+
+[node name="quit" type="Button" parent="UI/GOmenu" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 768.0
+margin_top = 1152.0
+margin_right = 1280.0
+margin_bottom = 1280.0
+rect_min_size = Vector2( 64, 16 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 22 )
+custom_styles/normal = ExtResource( 23 )
+custom_fonts/font = ExtResource( 24 )
+custom_colors/font_color = Color( 0.592157, 0.937255, 0.701961, 1 )
+custom_colors/font_color_hover = Color( 0.443137, 0.803922, 0.556863, 1 )
+custom_colors/font_color_pressed = Color( 0.443137, 0.803922, 0.556863, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Quit"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_colors", "custom_styles" ]
+
+[node name="menu" type="Control" parent="UI" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="title" type="Label" parent="UI/menu" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 384.0
+margin_right = 2048.0
+margin_bottom = 896.0
+rect_min_size = Vector2( 64, 16 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.593262, 0.9375, 0.703526, 1 )
+custom_colors/font_color_shadow = Color( 0.800781, 0.215836, 0.215836, 1 )
+custom_constants/shadow_offset_x = 10
+custom_constants/shadow_offset_y = 5
+text = "CHRONO_TANK"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "custom_constants", "custom_fonts" ]
+
+[node name="start" type="Button" parent="UI/menu" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 768.0
+margin_top = 896.0
+margin_right = 1280.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 64, 16 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 22 )
+custom_styles/normal = ExtResource( 23 )
+custom_fonts/font = ExtResource( 24 )
+custom_colors/font_color = Color( 0.592157, 0.937255, 0.701961, 1 )
+custom_colors/font_color_hover = Color( 0.443207, 0.804688, 0.557359, 1 )
+custom_colors/font_color_pressed = Color( 0.443137, 0.803922, 0.556863, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Start"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_colors", "custom_fonts", "custom_styles" ]
+
+[node name="quit" type="Button" parent="UI/menu" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 768.0
+margin_top = 1152.0
+margin_right = 1280.0
+margin_bottom = 1280.0
+rect_min_size = Vector2( 64, 16 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 22 )
+custom_styles/normal = ExtResource( 23 )
+custom_fonts/font = ExtResource( 24 )
+custom_colors/font_color = Color( 0.592157, 0.937255, 0.701961, 1 )
+custom_colors/font_color_hover = Color( 0.443137, 0.803922, 0.556863, 1 )
+custom_colors/font_color_pressed = Color( 0.443137, 0.803922, 0.556863, 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Quit"
+flat = false
+align = 1
+_sections_unfolded = [ "Rect", "custom_colors", "custom_styles" ]
+
+[node name="tutorial" type="Label" parent="UI/menu" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 128.0
+margin_top = 1280.0
+margin_right = 1877.0
+margin_bottom = 1792.0
+rect_min_size = Vector2( 64, 16 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 26 )
+custom_colors/font_color = Color( 0.592157, 0.937255, 0.701961, 1 )
+text = "How to play:
+- time stands still while you decide where you drive and shoot
+- upon deciding on your thoughtfully and strategically chosen destination, time continues and your character and the enemies will move and shoot
+- don´t get hit btw"
+valign = 1
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "custom_colors", "custom_fonts" ]
+
+[node name="level" type="Label" parent="UI" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 768.0
+margin_top = 256.0
+margin_right = 1280.0
+margin_bottom = 384.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 24 )
+custom_colors/font_color = Color( 0.592157, 0.937255, 0.701961, 1 )
+custom_colors/font_color_shadow = Color( 0.211765, 0.211765, 0.211765, 1 )
+custom_constants/shadow_offset_x = 10
+custom_constants/shadow_offset_y = 0
+text = "Level 1"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "BBCode", "custom_colors", "custom_constants", "custom_fonts" ]
+
+[node name="helper" type="Label" parent="UI" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 512.0
+margin_top = 1856.0
+margin_right = 1536.0
+margin_bottom = 1984.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 26 )
+custom_colors/font_color = Color( 0.592157, 0.937255, 0.701961, 1 )
+align = 1
+valign = 1
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Rect", "custom_colors", "custom_fonts" ]
+
+[node name="audioPlayerEffects" type="AudioStreamPlayer" parent="." index="4"]
+
+stream = null
+volume_db = -55.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[connection signal="pressed" from="UI/GOmenu/restart" to="." method="_on_restart_pressed"]
+
+[connection signal="pressed" from="UI/GOmenu/backToMenu" to="." method="_on_backToMenu_pressed"]
+
+[connection signal="pressed" from="UI/GOmenu/quit" to="." method="_on_quit_pressed"]
+
+[connection signal="pressed" from="UI/menu/start" to="." method="_on_start_pressed"]
+
+[connection signal="pressed" from="UI/menu/quit" to="." method="_on_quit_pressed"]
+
+

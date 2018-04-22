@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://enemies/enemy.gd" type="Script" id=1]
+[ext_resource path="res://enemies/bullets/enemy3Bullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sound/shoot1.wav" type="AudioStream" id=3]
+[ext_resource path="res://explosion.tscn" type="PackedScene" id=4]
+[ext_resource path="res://art/enemies/enemyTank3Bottom.png" type="Texture" id=5]
+[ext_resource path="res://art/enemies/enemyTank3Top.png" type="Texture" id=6]
+[ext_resource path="res://art/enemies/bullets/bulletTrailViolet.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 48, 52 )
+
+[node name="enemy3" type="KinematicBody2D" groups=[
+"enemy",
+]]
+
+input_pickable = true
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+bullet = ExtResource( 2 )
+movDur = 0.2
+bulletVel = 1800
+movRange = 200
+bulletSpread = 30
+deathSound = ExtResource( 3 )
+explosion = ExtResource( 4 )
+
+[node name="feet" type="Sprite" parent="." index="0"]
+
+scale = Vector2( 8, 8 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="top" type="Sprite" parent="." index="1"]
+
+scale = Vector2( 8, 8 )
+texture = ExtResource( 6 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="bulletSpawn" type="Position2D" parent="top" index="0"]
+
+position = Vector2( -0.5, -7.75 )
+
+[node name="muzzleFlash" type="Sprite" parent="top" index="1"]
+
+visible = false
+position = Vector2( 0, -12.5 )
+scale = Vector2( 2.5, 2.5 )
+texture = ExtResource( 7 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="muzzleFlashTimer" type="Timer" parent="top/muzzleFlash" index="0"]
+
+process_mode = 1
+wait_time = 0.05
+one_shot = true
+autostart = false
+
+[node name="collider" type="CollisionShape2D" parent="." index="2"]
+
+visible = false
+position = Vector2( 0, 4 )
+shape = SubResource( 1 )
+
+[node name="tween" type="Tween" parent="." index="3"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[connection signal="timeout" from="top/muzzleFlash/muzzleFlashTimer" to="." method="_on_muzzleFlashTimer_timeout"]
+
+[connection signal="tween_completed" from="tween" to="." method="_on_tween_tween_completed"]
+
+

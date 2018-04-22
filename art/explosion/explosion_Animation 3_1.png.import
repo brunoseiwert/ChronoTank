@@ -1,0 +1,32 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/explosion_Animation 3_1.png-9e5f2678ad64a5412576fd0370d6491d.stex"
+
+[deps]
+
+source_file="res://art/explosion/explosion_Animation 3_1.png"
+source_md5="350d9d92b7a57e0d005bfe2d910d6311"
+
+dest_files=[ "res://.import/explosion_Animation 3_1.png-9e5f2678ad64a5412576fd0370d6491d.stex" ]
+dest_md5="785905cbfd13d44f5d517cfa2f83d347"
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0
